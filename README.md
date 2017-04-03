@@ -36,38 +36,18 @@ Each block will be an object that holds a point value and color, as well as its 
 **Your project will be graded, in part, by the extent to which you adopt approaches from the course into your implementation, _and_ your discussion about this.**
 
 ### External Technologies
-You are encouraged to develop a project that connects to external systems. For example, this includes systems that:
-
-- retrieve information or publish data to the web
-- generate or process sound
-- control robots or other physical systems
-- interact with databases
-
-If your project will do anything in this category (not only the things listed above!), include this section and discuss.
+We plan to implement a leaderboard, storing the user's name and score, and if possible, in terms of space, a replay of their game. We initially plan to do this in an offline database. But if server space can be found, we can host the database online.
 
 ### Data Sets or other Source Materials
-If you will be working with existing data, where will you get those data from? (Dowload from a website? Access in a database? Create in a simulation you will build? ...)
-
-How will you convert your data into a form usable for your project?  
-
-If you are pulling data from somewhere, actually go download it and look at it before writing the proposal. Explain in some detail what your plan is for accomplishing the necessary processing.
-
-If you are using some other starting materials, explain what they are. Basically: anything you plan to use that isn't code.
+Not Applicable
 
 ### Deliverable and Demonstration
-Explain exactly what you'll have at the end. What will it be able to do at the live demo?
-Once completed, we will be able to demonstrate the game and play through a few rounds.
+At the end, we will have a racket program that when executed, will create a window where the game can be played by the user using keyboard inputs. This game contains visuals and sound that will be displayed for everyone to see. This will be what we demonstrate during our final presentaiton
+At the end, we will show the leaderboard and how it works, including the raw data stored in the database.
 
-What exactly will you produce at the end of the project? A piece of software, yes, but what will it do? Here are some questions to think about (and answer depending on your application).
-
-Will it run on some data, like batch mode? Will you present some analytical results of the processing? How can it be re-run on different source data?
-Nope, so far we have not decided to implement any external data.
-Will it be interactive? Can you show it working? This project involves a live demo, so interactivity is good.
-Yes, the game will be fully playable and demonstrable.
 ### Evaluation of Results
-How will you know if you are successful? 
-If you include some kind of _quantitative analysis,_ that would be good.
-Simply put if the games plays, then we have achieved success, if not testing will be necessary to see what is going wrong.
+Simply put if the games plays properly and the leaderboard works properly as we described, then we have achieved success. If not, testing will be necessary to see what is going wrong.
+
 ## Architecture Diagram
 Upload the architecture diagram you made for your slide presentation to your repository, and include it in-line here.
 
@@ -85,18 +65,21 @@ You will be expected to turn in code, documentation, and data (as appropriate) a
 Write concrete steps for your schedule to move from concept to working system. 
 
 ### First Milestone (Sun Apr 9)
-Be able to place block on each of the tiles of the game 
+- Be able to place block on each of the tiles of the game 
 
 ### Second Milestone (Sun Apr 16)
-Be able to combine the blocks and recognize when matching blocks are next to eachother 
+- Be able to combine the blocks and recognize when matching blocks are next to eachother 
+- Implement user keyboard control and sounds
 
 ### Public Presentation (Mon Apr 24, Wed Apr 26, or Fri Apr 28 [your date to be determined later])
-What additionally will be completed before the public presentation?
+- Add the leaderboard, bug test and polish the game and underlying code
 
 ## Group Responsibilities
 Here each group member gets a section where they, as an individual, detail what they are responsible for in this project. Each group member writes their own Responsibility section. Include the milestones and final deliverable.
 
 Please use Github properly: each individual must make the edits to this file representing their own section of work.
+Henry: Graphics
+Tim: Player controls, sound, data structures (defining object classes)
 
 **Additional instructions for teams of three:** 
 * Remember that you must have prior written permission to work in groups of three (specifically, an approved `FP3` team declaration submission).
@@ -107,10 +90,7 @@ Please use Github properly: each individual must make the edits to this file rep
 In the headings below, replace the silly names and GitHub handles with your actual ones.
 
 ### Henry Walker @viceroyvonsalsa
-will write the gui, user input, and block structures.
+Will work on the gui, block structures, and menu interface
 
-### Leonard Lambda @lennylambda
-will work on...
-
-### Frank Funktions @frankiefunk 
-Frank is team lead. Additionally, Frank will work on...   
+### Tim Barber @voxibanez
+Will work on user controls, sound, and leaderboard
