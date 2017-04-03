@@ -16,13 +16,20 @@ Explain what approaches from class you will bring to bear on the project.
 Be explicit about the techiques from the class that you will use. For example:
 
 - Will you use data abstraction? How?
+yes each object will be encapsulated, the user will not be able to change anything other than the game board.
 - Will you use recursion? How?
+yes, for each move recursion will be used to check which blocks are touching eachother.
 - Will you use map/filter/reduce? How? 
+yes, we will likely map the direction the player inputs to the board. so if the player chooses left we would map left to the board 
+moving each block left as long as they are not blocked by another
 - Will you use object-orientation? How?
+Each block will be an object that holds a point value and color.
 - Will you use functional approaches to processing your data? How?
 - Will you use state-modification approaches? How? (If so, this should be encapsulated within objects. `set!` pretty much should only exist inside an object.)
 - Will you build an expression evaluator, like we did in the symbolic differentatior and the metacircular evaluator?
+nope
 - Will you use lazy evaluation approaches?
+nope
 
 The idea here is to identify what ideas from the class you will use in carrying out your project. 
 
@@ -49,17 +56,18 @@ If you are using some other starting materials, explain what they are. Basically
 
 ### Deliverable and Demonstration
 Explain exactly what you'll have at the end. What will it be able to do at the live demo?
+Once completed, we will be able to demonstrate the game and play through a few rounds.
 
 What exactly will you produce at the end of the project? A piece of software, yes, but what will it do? Here are some questions to think about (and answer depending on your application).
 
 Will it run on some data, like batch mode? Will you present some analytical results of the processing? How can it be re-run on different source data?
-
+Nope, so far we have not decided to implement any external data.
 Will it be interactive? Can you show it working? This project involves a live demo, so interactivity is good.
-
+Yes, the game will be fully playable and demonstrable.
 ### Evaluation of Results
 How will you know if you are successful? 
 If you include some kind of _quantitative analysis,_ that would be good.
-
+Simply put if the games plays, then we have achieved success, if not testing will be necessary to see what is going wrong.
 ## Architecture Diagram
 Upload the architecture diagram you made for your slide presentation to your repository, and include it in-line here.
 
@@ -99,7 +107,7 @@ Please use Github properly: each individual must make the edits to this file rep
 In the headings below, replace the silly names and GitHub handles with your actual ones.
 
 ### Henry Walker @viceroyvonsalsa
-will write the....
+will write the gui, user input, and block structures.
 
 ### Leonard Lambda @lennylambda
 will work on...
