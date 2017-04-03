@@ -52,7 +52,7 @@ Simply put if the games plays properly and the leaderboard works properly as we 
 Upload the architecture diagram you made for your slide presentation to your repository, and include it in-line here.
 
 Create several paragraphs of narrative to explain the pieces and how they interoperate.
-![image](/Architecture(4).jpg?raw=true "Diagram")
+![image](/Architecture.jpg?raw=true "Diagram")
 
 The user generates input using the keyboard, which goes to the main program. The program then generates a new square and moves all the squares together. It also creates a sound which is played to the user. Then this information is stored in a database as a "move" and when the player's game is over, it stores the final score and the user's name in the database.
 ## Schedule
