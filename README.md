@@ -52,7 +52,7 @@ Simply put if the games plays properly and the leaderboard works properly as we 
 Upload the architecture diagram you made for your slide presentation to your repository, and include it in-line here.
 
 Create several paragraphs of narrative to explain the pieces and how they interoperate.
-
+![image](/Architecture(4).jpg?raw=true "Diagram")
 ## Schedule
 Explain how you will go from proposal to finished product. 
 
