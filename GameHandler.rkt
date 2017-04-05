@@ -4,7 +4,7 @@
 
 ;;Other files handler will use
 (require "Sound.rkt")
-(require "Algorythms.rkt")
+(require "Algorithms.rkt")
 
 ;;Keyboard event handler, pretty much the only thing that needs to happen in the handler
 ;;Everything else will happen in other files (libraries)
@@ -13,6 +13,8 @@
 (define (startGame)
     (set! mainGrid (addSquare mainGrid 1 4))
   (set! mainGrid (addSquare mainGrid 1 3))
+    (set! mainGrid (addSquare mainGrid 1 2))
+    (set! mainGrid (addSquare mainGrid 1 1))
  ;;Create no window
 (cond ((false?(big-bang 0 0 1 2)) (display "Failed to load world\n"))
     (else (display "World loaded succesfully\n")))
@@ -26,23 +28,32 @@
   ;;Need to move/merge squares in algorythms, play a sound, and update the window with new graphics
 (define (change w a-key)
   (cond
-    [(key=? a-key 'left)  (begin (set! mainGrid (moveLeft mainGrid)) (display mainGrid))]
-    [(key=? a-key 'right) (begin (set! mainGrid (moveRight mainGrid)) (display mainGrid))]
+    [(key=? a-key 'left)  (begin (set! mainGrid (moveLeft mainGrid)) (printGrid mainGrid))]
+    [(key=? a-key 'right) (begin (set! mainGrid (moveRight mainGrid)) (printGrid mainGrid))]
     [(key=? a-key 'up)    (begin (moveUp mainGrid) (display mainGrid))]
-    [(key=? a-key 'down)  (begin (set! mainGrid (moveDown mainGrid)) (display mainGrid))]
+    [(key=? a-key 'down)  (begin (set! mainGrid (moveDown mainGrid)) (printGrid mainGrid))]
     [(key=? a-key #\space)  ]
     [(key=? a-key 'escape)  ]
     ))
-
+  
+  (define (printGrid grid)
+    (if (eq? grid '()) '()
+     (begin
+    (display (car grid))
+    (display "\n")
+    (printGrid (cdr grid)))))
+  
   ;;Start the game
   (startGame)
-  (display mainGrid)
+  (printGrid mainGrid)
+
+
     ))
 
 
 (main)
 
-  
+
 
 
 
