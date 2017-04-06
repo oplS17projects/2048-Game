@@ -30,16 +30,21 @@
   (cond
     [(key=? a-key 'left)  (begin (set! mainGrid (moveLeft mainGrid)) (printGrid mainGrid))]
     [(key=? a-key 'right) (begin (set! mainGrid (moveRight mainGrid)) (printGrid mainGrid))]
-    [(key=? a-key 'up)    (begin (moveUp mainGrid) (display mainGrid))]
+    [(key=? a-key 'up)    (begin (set! mainGrid (moveUp mainGrid)) (printGrid mainGrid))]
     [(key=? a-key 'down)  (begin (set! mainGrid (moveDown mainGrid)) (printGrid mainGrid))]
     [(key=? a-key #\space)  ]
     [(key=? a-key 'escape)  ]
     ))
   
   (define (printGrid grid)
-    (if (eq? grid '()) '()
-     (begin
-    (display (car grid))
+    (define (displayLevel x)
+    (cond ((eq? x '()) '())
+        ((square? (car x)) (cons (((car x) 'getLevel)) (displayLevel (cdr x))))
+     (else (cons (car x) (displayLevel (cdr x))))))
+    
+    (if (eq? grid '()) "End of Grid"
+    (begin
+    (display (displayLevel (car grid)))
     (display "\n")
     (printGrid (cdr grid)))))
   

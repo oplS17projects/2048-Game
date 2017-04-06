@@ -52,6 +52,7 @@
   ;;(eq? maybeSquare square ))
 
 ;;This will be used for both left and right folding
+;;List input and output must be reversed for right folding
 (define (moveFold x y)
     
     (define (moveAllToLeft x)
@@ -61,19 +62,17 @@
           (else (cons (car x) (moveAllToLeft (cdr x))))
           ))
 
-    (define (mergeSquares x)
+    (define (mergeSquaresLeft x)
       (if (eq? x '()) '()
         (if (and (square? (car x)) (square? (cadr x)))
            (if (= (((car x) 'getLevel)) (((cadr x) 'getLevel)))
                (begin
                (((car x) 'levelUp))
-               (mergeSquares (append (cons (car x) (cdr (cdr x))) '(0))))
-               (cons (car x)(mergeSquares (cdr x))))
-               (cons (car x)(mergeSquares (cdr x)))
+               (mergeSquaresLeft (append (cons (car x) (cdr (cdr x))) '(0))))
+               (cons (car x)(mergeSquaresLeft (cdr x))))
+               (cons (car x)(mergeSquaresLeft (cdr x)))
                )))
-
-    ;;(moveAllToLeft x)
-    (mergeSquares (moveAllToLeft x))
+    (mergeSquaresLeft (moveAllToLeft x))
     )
 
 (define (moveLeft grid)
@@ -92,8 +91,32 @@
          (foldr moveRightFold '() grid))
         )
 
-(define (moveUp grid) -1)
-(define (moveDown grid) -1)
+(define (moveUp grid)
+        
+(define (moveUpFold x y)
+    (cons (moveFold x y) y))
+
+  (define (moveUpLoop grid)
+  (cond ((eq? (car grid) '()) '())
+        (else
+         (cons (foldr (lambda (x y) (cons (car x) y)) '() grid) (moveUpLoop (foldr (lambda (x y) (cons (cdr x) y)) '() grid))))
+        ))
+
+  (moveUpLoop (foldr moveUpFold '() (moveUpLoop grid)))
+  )
+
+(define (moveDown grid)
+  (define (moveDownFold x y)
+    (cons (moveFold x y) y))
+
+  (define (moveDownLoop grid)
+  (cond ((eq? (car grid) '()) '())
+        (else
+         (cons (foldr (lambda (x y) (cons (car x) y)) '() grid) (moveDownLoop (foldr (lambda (x y) (cons (cdr x) y)) '() grid))))
+        ))
+;;Same as for up but lists are reversed for input and then again as output
+  (reverse(moveDownLoop (foldr moveDownFold '() (reverse(moveDownLoop grid)))))
+  )
 
 
 (provide (all-defined-out))
