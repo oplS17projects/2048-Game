@@ -115,7 +115,7 @@
          (cons (foldr (lambda (x y) (cons (car x) y)) '() grid) (moveDownLoop (foldr (lambda (x y) (cons (cdr x) y)) '() grid))))
         ))
 ;;Same as for up but lists are reversed for input and then again as output
-  (reverse(moveDownLoop (foldr moveDownFold '() (reverse(moveDownLoop grid)))))
+  (reverse(moveDownLoop (foldr moveDownFold '() (moveDownLoop grid))))
   )
 
 

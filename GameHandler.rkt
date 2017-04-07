@@ -42,11 +42,11 @@
         ((square? (car x)) (cons (((car x) 'getLevel)) (displayLevel (cdr x))))
      (else (cons (car x) (displayLevel (cdr x))))))
     
-    (if (eq? grid '()) "End of Grid"
+    (cond ((not(eq? grid '()))
     (begin
     (display (displayLevel (car grid)))
     (display "\n")
-    (printGrid (cdr grid)))))
+    (printGrid (cdr grid))))))
   
   ;;Start the game
   (startGame)
