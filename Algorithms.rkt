@@ -26,6 +26,25 @@
     )
   (goToArrayX grid 1 x y))
 
+(define (testGridX)
+  (let ((test (createArray 4 4))) 
+    (begin
+      (set! test (addSquare test 1 1))
+      (set! test (addSquare test 1 2))
+      (set! test (addSquare test 1 3))
+      (set! test (addSquare test 1 4))
+      test)))
+
+(define (testGridY)
+  (let ((test (createArray 4 4))) 
+    (begin
+      (set! test (addSquare test 1 1))
+      (set! test (addSquare test 2 1))
+      (set! test (addSquare test 3 1))
+      (set! test (addSquare test 4 1))
+      test)))
+
+
 ;;Get Square
 (define (getSquare grid x y)
   (define (goToArrayX grid countx x y)

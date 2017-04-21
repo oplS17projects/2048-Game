@@ -2,7 +2,7 @@
 (require 2htdp/image)
 (require "Algorithms.rkt")
 (define grid-square (square 40 'outline 'black)) ;;1 unit = px size of square
-(define testL '( (20 20 20 "solid" "red") (60 60 30 "outline" "blue") (-20 -20 10 "solid" "green") (-60 -60 5 "outline" "black"))) ;;square (x y lvl solid? color)
+;(define testL '( (20 20 20 "solid" "red") (60 60 30 "outline" "blue") (-20 -20 10 "solid" "green") (-60 -60 5 "outline" "black"))) ;;square (x y lvl solid? color)
 ;;This defines the grid size. will use -a to a for x and y directions
 (define grid_size 50)
 
@@ -37,11 +37,18 @@
   (reverse(loopy squares (* grid_size -1)))
   ))
   
-(define (plot-squares list-squares)
-  (if (null? list-squares)
-      (grid 4 4) ;;grid can be any size but if grid r or c arent even it will throw off the square placement
-       (overlay/offset (square (car (cdr (cdr (car list-squares)))) (car (cdr (cdr (cdr (car list-squares))))) (car (cdr (cdr (cdr (cdr (car list-squares))))))) (car (car list-squares )) (car (cdr (car list-squares))) (plot-squares (cdr list-squares)))))
+;(define (plot-squares list-squares)
+  ;(if (null? list-squares)
+      ;(grid 4 4) ;;grid can be any size but if grid r or c arent even it will throw off the square placement
+       ;(overlay/offset (square (car (cdr (cdr (car list-squares)))) (car (cdr (cdr (cdr (car list-squares))))) (car (cdr (cdr (cdr (cdr (car list-squares))))))) (car (car list-squares )) (car (cdr (car list-squares))) (plot-squares (cdr list-squares)))))
 
+(define (plot-squares list-squares)
+  (if (null?  list-squares)
+      (grid 4 4)
+      (overlay/offset (square 30 "solid" "black") (car (car list-squares)) (car (cdr (car list-squares))) (plot-squares (cdr list-squares)))))
+
+(plot-squares-interop (testGridX))
+;(plot-squares-interop (testGridY))
 ;;(plot-squares testL)
 
 (provide (all-defined-out))
