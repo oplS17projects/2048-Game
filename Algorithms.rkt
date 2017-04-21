@@ -35,12 +35,12 @@
              (if (square? (car grid)) (car grid)
                  ;;Send back a blank square to prevent hard errors from closing the program
                  (begin
-                   (display "No square at: (")
-                   (display x)
-                   (display ",")
-                   (display y)
-                   (display ")")
-                 (blankSquare))))
+                   ;;(display "No square at: (")
+                   ;;(display x)
+                   ;;(display ",")
+                   ;;(display y)
+                   ;;(display ")")
+                 0)))
           (else (goToArrayY (cdr grid) (+ county 1) x y))))
     (cond ((eq? grid '()) (display "Coordinates outside of grid"))
       ((= countx x) (goToArrayY (car grid) 1 x y))  
@@ -52,9 +52,19 @@
   ;;(length (car squares)))
 
 (define (genRandSquare grid)
+  (define (genRandSquare2 grid x y)
+        (if (square? (getSquare grid x y))
+            (genRandSquare2 grid (+ (random (array-size grid)) 1) (+ (random (array-size grid)) 1))
+            ;;else
+            (addSquare grid x y)))
   ;;First, check to see if its possible to place a square
-  (if (foldr (lambda (x y) (and (foldr (lambda (and y (square? x))) true x) y)) true grid)
-      )
+  (if (foldr (lambda (x y) (and (foldr (lambda (x y) (and y (square? x))) true x) y)) true grid)
+      ;;Game over, no blank spaces left
+      (display "Game Over")
+      ;;Else
+      (genRandSquare2 grid (+ (random (array-size grid)) 1) (+ (random (array-size grid)) 1)))
+  )
+      
 
 (define (square? maybeSquare)
   (not (number? maybeSquare)))
