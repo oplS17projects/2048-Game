@@ -1,5 +1,6 @@
 #lang racket
 (require 2htdp/image)
+(require "Algorithms.rkt")
 (define grid-square (square 40 'outline 'black)) ;;1 unit = px size of square
 (define testL '( (20 20 20 "solid" "red") (60 60 30 "outline" "blue") (-20 -20 10 "solid" "green") (-60 -60 5 "outline" "black"))) ;;square (x y lvl solid? color)
 ;;This defines the grid size. will use -a to a for x and y directions
@@ -18,9 +19,7 @@
 (define (plot-squares-interop list-squares)
   (plot-squares (convert list-squares)))
 
-(define (array-size squares)
-  (foldr  (lambda (x y) (+ y 1)) 0 squares))
-  ;;(length (car squares)))
+
 
 (define (convert squares)
   (define (loopx squares x y)

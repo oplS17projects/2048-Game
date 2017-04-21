@@ -47,6 +47,15 @@
         (else (goToArrayX (cdr grid) (+ countx 1) x y))))
   (goToArrayX grid 1 x y))
 
+(define (array-size squares)
+  (foldr  (lambda (x y) (+ y 1)) 0 squares))
+  ;;(length (car squares)))
+
+(define (genRandSquare grid)
+  ;;First, check to see if its possible to place a square
+  (if (foldr (lambda (x y) (and (foldr (lambda (and y (square? x))) true x) y)) true grid)
+      )
+
 (define (square? maybeSquare)
   (not (number? maybeSquare)))
   ;;(eq? maybeSquare square ))

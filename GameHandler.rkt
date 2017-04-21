@@ -45,7 +45,7 @@
 
 (define (menu-control w a-key)
   (cond
-    [(key=? a-key "numpad-enter")  (big-bang 0 (on-key game-control) (to-draw (plot-squares mainGrid)))]
+    [(key=? a-key " ")  (big-bang 0 (on-key game-control) (to-draw (plot-squares-interop mainGrid)))]
     ))
   
   (define (printGrid grid)
