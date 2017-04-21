@@ -9,7 +9,6 @@
       (define (getLevel)
     level)
   (define (levelUp)
-    ;;Find another way besides set! to do this
     (begin (set! level (+ 1 level))
            level)
     )

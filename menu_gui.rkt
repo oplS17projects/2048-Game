@@ -14,4 +14,7 @@
       (big-bang 0(to-draw stop-screen))
     x))
 
- (big-bang 0 (on-key key-event-handler) (to-draw start-screen))
+
+;; (big-bang 0 (on-key key-event-handler) (to-draw start-screen))
+
+(provide (all-defined-out))
