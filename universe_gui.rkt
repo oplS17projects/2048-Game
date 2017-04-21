@@ -4,7 +4,7 @@
 (define grid-square (square 40 'outline 'black)) ;;1 unit = px size of square
 ;(define testL '( (20 20 20 "solid" "red") (60 60 30 "outline" "blue") (-20 -20 10 "solid" "green") (-60 -60 5 "outline" "black"))) ;;square (x y lvl solid? color)
 ;;This defines the grid size. will use -a to a for x and y directions
-(define grid_size 50)
+(define grid_size 65) ;;1 1 is top left
 
 (define (row size) ;;size of each row on the grid
   (if (> size 1)
@@ -42,12 +42,19 @@
       ;(grid 4 4) ;;grid can be any size but if grid r or c arent even it will throw off the square placement
        ;(overlay/offset (square (car (cdr (cdr (car list-squares)))) (car (cdr (cdr (cdr (car list-squares))))) (car (cdr (cdr (cdr (cdr (car list-squares))))))) (car (car list-squares )) (car (cdr (car list-squares))) (plot-squares (cdr list-squares)))))
 
+(define (level-square level) 
+  (square (* 10 level) "solid" (if (> level 3) "red" "green")))
+
 (define (plot-squares list-squares)
   (if (null?  list-squares)
-      (grid 4 4)
-      (overlay/offset (square 30 "solid" "black") (car (car list-squares)) (car (cdr (car list-squares))) (plot-squares (cdr list-squares)))))
+      (grid 4 4)  
+      (overlay/offset (level-square (((car (cdr (cdr (car list-squares)))) 'getLevel))) (car (car list-squares)) (car (cdr (car list-squares))) (plot-squares (cdr list-squares)))))
 
-(plot-squares-interop (testGridX))
+(plot-squares-interop (testGridY))
+(convert (testGridX))
+;(testGridY)
+ ;(((car (car (testGridY))) 'getLevel))
+;(getSquare (testGridY) 1 1)
 ;(plot-squares-interop (testGridY))
 ;;(plot-squares testL)
 
