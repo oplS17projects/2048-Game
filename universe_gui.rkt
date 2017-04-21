@@ -22,19 +22,20 @@
 
 
 (define (convert squares)
+  (let ((as (array-size squares)))
   (define (loopx squares x y)
      (if (eq? squares '()) '()
-         (if (square? (car squares))
-             (cons (list x y (car squares)) (loopx (cdr squares) (+ x (/ grid_size (* (array-size squares)) 2)) y))
-             (loopx (cdr squares) (+ x (/ grid_size (* (array-size squares)) 2)) y)
+        (if (square? (car squares))
+             (cons (list x y (car squares)) (loopx (cdr squares) (+ x  (/ (* 2 grid_size) as)) y))
+             (loopx (cdr squares) (+ x (/ (* 2 grid_size) as)) y))
              
-    )))
+   ))
   (define (loopy squares y)
     (if (eq? squares '()) '()
-        (append (loopx (car squares) (* grid_size -1) y) (loopy (cdr squares ) (+ y (/ grid_size (* (array-size squares)) 2))))
+        (append (loopx (car squares) (* grid_size -1) y) (loopy (cdr squares ) (+ y (/ (* 2 grid_size) as))))
         ))
   (reverse(loopy squares (* grid_size -1)))
-  )
+  ))
   
 (define (plot-squares list-squares)
   (if (null? list-squares)
