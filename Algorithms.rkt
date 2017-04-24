@@ -77,13 +77,27 @@
             ;;else
             (addSquare grid x y)))
   ;;First, check to see if its possible to place a square
-  (if (foldr (lambda (x y) (and (foldr (lambda (x y) (and y (square? x))) true x) y)) true grid)
+  (if (checkGameOver grid)
       ;;Game over, no blank spaces left
-      (display "Game Over")
+      '()
       ;;Else
       (genRandSquare2 grid (+ (random (array-size grid)) 1) (+ (random (array-size grid)) 1)))
   )
       
+(define (list-copy list)
+  (if (null? list) '() (cons (car list) (list-copy (cdr list)))))
+
+(define (checkGameOver grid) false)
+  ;;(let ((tempGrid (list-copy grid))) 
+  ;;(or (foldr (lambda (x y) (and (foldr (lambda (x y) (and y (square? x))) true x) y)) true (moveLeft tempGrid))
+       ;; (foldr (lambda (x y) (and (foldr (lambda (x y) (and y (square? x))) true x) y)) true (moveRight tempGrid))
+        ;; (foldr (lambda (x y) (and (foldr (lambda (x y) (and y (square? x))) true x) y)) true (moveUp tempGrid))
+         ;; (foldr (lambda (x y) (and (foldr (lambda (x y) (and y (square? x))) true x) y)) true (moveDown tempGrid)))))
+
+(define (gameOver? grid)
+  (if (checkGameOver grid) (begin (display "game Over") (set! isGameOver? true)) (set! isGameOver? false)))
+
+(define isGameOver? false)
 
 (define (square? maybeSquare)
   (not (number? maybeSquare)))
@@ -102,14 +116,16 @@
 
     (define (mergeSquaresLeft x)
       (if (eq? x '()) '()
+          (if (eq? (cdr x) '()) x
         (if (and (square? (car x)) (square? (cadr x)))
            (if (= (((car x) 'getLevel)) (((cadr x) 'getLevel)))
                (begin
+                 (display "If youre here, youre fucked")
                (((car x) 'levelUp))
                (mergeSquaresLeft (append (cons (car x) (cdr (cdr x))) '(0))))
                (cons (car x)(mergeSquaresLeft (cdr x))))
                (cons (car x)(mergeSquaresLeft (cdr x)))
-               )))
+               ))))
     (mergeSquaresLeft (moveAllToLeft x))
     )
 
