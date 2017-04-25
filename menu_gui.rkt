@@ -3,7 +3,7 @@
 (require 2htdp/image)
 
 (define (start-screen n)
-  (bitmap "StartScreen.png"))
+  (bitmap "start_menu.jpg"))
 
 (define (stop-screen n)
   (bitmap "StopScreen.png"))

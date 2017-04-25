@@ -1,10 +1,12 @@
 #lang racket
 (require 2htdp/image)
 (require "Algorithms.rkt")
-(define grid-square (square 40 'outline 'black)) ;;1 unit = px size of square
+
 ;(define testL '( (20 20 20 "solid" "red") (60 60 30 "outline" "blue") (-20 -20 10 "solid" "green") (-60 -60 5 "outline" "black"))) ;;square (x y lvl solid? color)
 ;;This defines the grid size. will use -a to a for x and y directions
-(define grid_size 60) ;;1 1 is top left
+(define grid_size 240) ;;1 1 is top left
+(define square_size (* grid_size (/ 2 3)))
+(define grid-square (square square_size 'outline 'black)) ;;1 unit = px size of square
 
 (define (row size) ;;size of each row on the grid
   (if (> size 1)
@@ -20,9 +22,9 @@
   (let ((test (createArray 4 4))) 
     (begin
     (set! test (addSquare test 1 1))
-      (set! test (addSquare test 2 3))
-    (set! test (addSquare test 4 3))
-      (set! test (addSquare test 4 4))
+    ;  (set! test (addSquare test 2 2))
+   ; (set! test (addSquare test 4 3))
+     ; (set! test (addSquare test 4 4))
       test)))
 
 (define mainGridun '())
@@ -70,17 +72,26 @@
   ;(convert2XIter (car squares)
     1)
       
+(define (get-color level)
+  (if (< level 4) "green"
+      (if (< level 7) "red"
+          (if (< level 10) "blue"
+              "yellow"))))
 
+(define (get-size level)
+  (if (eq? (modulo level 3) 0)
+      120
+      (* 40 (modulo level 3))))
 
 (define (level-square level) 
-  (square (* 10 level) "solid" (if (> level 3) "red" "green"))) ;; not final size
+  (square (get-size level) "solid" (get-color level))) ;; not final size
 
 (define (plot-squares list-squares)
   (if (null?  list-squares)
-      (grid 4 4)  
+      (grid 4 4)              ;;4 4
       (overlay/offset (level-square (((car (cdr (cdr (car list-squares)))) 'getLevel))) (car (car list-squares)) (car (cdr (car list-squares))) (plot-squares (cdr list-squares)))))
 
-;;(plot-squares-interop (testGridZ))
+(plot-squares-interop (testGridZ))
 ;(plot-squares (testGridY))
 
 ;;(convert (testGridZ))
