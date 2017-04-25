@@ -4,12 +4,13 @@
 ### Statement
 Describe your project. Why is it interesting? Why is it interesting to you personally? What do you hope to learn? 
 
-We will be using racket to create the game 2048
+We used racket to create the game 2048
 
-A player will need to combine tiles of the same color to form a new tile with a different color.
-The player is given a limited amount of space and each movement of a tile produces a new tile. This game will differentiate itself from the game 2048 by using a pattern/color scheme instead of numbers.
+A player will need to combine tiles of the same color to form a new tile of a greater size, combining two big tiles together will result in a smaller differently colored tile.
+The player is given a limited amount of space and each movement of a tile generates a new randomly placed tile. This game will differentiate itself from the game 2048 by using a pattern/color scheme instead of numbers.
 The player must try and combine as many squares as possible before the playing area is full and no moves are left.
-Both Tim and I are interested in making games so we decided to choose one that was practical and applicable to what we have learned in class. We hope to learn proper abstraction and code practices in racket. We believe that creating a game that demonstrates a visual representation of classes and data abstraction would be a great way to demonstrate what we have learned in this class.
+
+Both Tim and I are interested in making games so we decided to choose one that was practical and applicable to what we have learned in class. We implemented proper abstraction and code practices in racket. We believe that creating a game that demonstrates a visual representation of classes and data abstraction would be a great way to demonstrate what we have learned in this class.
 
 ### Analysis
 Explain what approaches from class you will bring to bear on the project.
@@ -17,18 +18,18 @@ Explain what approaches from class you will bring to bear on the project.
 Be explicit about the techniques from the class that you will use. For example:
 
 - Data Abstraction
-We plan to use data abstraction to its full potential by creating methods with meaningful names to abstract the data and keep a clean coding environment where everything is well-defined and easy to read.
+We used data abstraction to its full potential by creating methods with meaningful names to abstract the data and keep a clean coding environment where everything is well-defined and easy to read.
 
 - Data Encapsulation
 Each game object will be encapsulated, the user will not be able to change anything other than the game board through keyboard input.
 
 - Recursion
-For each move, recursion will be used to check which blocks are touching each other. 
+For each move, recursion is used to check which blocks are touching each other. Recurion is also used to plot the squares to the grid. 
 
 - Map
-Map will be used to map the direction the player inputs to the board. so if the player chooses left we would map left to squares on the board, moving each block left as long as they are not blocked by another
+Map is used to map the direction the player inputs to the board. so if the player chooses left it would map left to squares on the board, moving each block left as long as they are not blocked by another
 - Object-orientation
-Each block will be an object that holds a point value and color, as well as its coordinates on the grid.
+Each block will be an object that holds two point values and a level.
 
 - Will you use state-modification approaches? How? (If so, this should be encapsulated within objects. `set!` pretty much should only exist inside an object.)
 
@@ -42,11 +43,11 @@ We plan to implement a leaderboard, storing the user's name and score, and if po
 Not Applicable
 
 ### Deliverable and Demonstration
-At the end, we will have a racket program that when executed, will create a window where the game can be played by the user using keyboard inputs. This game contains visuals and sound that will be displayed for everyone to see. This will be what we demonstrate during our final presentation
+Currently we have a racket program that when executed, creates a window where the game can be played by the user using keyboard inputs. This game contains visuals and sound that will be displayed for everyone to see. This will be what we demonstrate during our final presentation
 At the end, we will show the leaderboard and how it works, including the raw data stored in the database.
 
 ### Evaluation of Results
-Simply put if the games plays properly and the leaderboard works properly as we described, then we have achieved success. If not, testing will be necessary to see what is going wrong.
+We have currently achieved a majority of our goals. There are some minor hiccups with moving the squares but nothing that obstructs the user from enjoying our game. With the additional time after our demonstration until the code turn in, we will work on smoothing out the user experience, finishing the sound and possibly the leaderboard, and if possible include game modes with differing sized grids.
 
 ## Architecture Diagram
 Upload the architecture diagram you made for your slide presentation to your repository, and include it in-line here.
