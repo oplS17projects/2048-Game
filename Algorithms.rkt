@@ -26,6 +26,8 @@
     )
   (goToArrayX grid 1 x y))
 
+
+;;Debug Grids
 (define (testGridX)
   (let ((test (createArray 4 4))) 
     (begin
@@ -70,6 +72,8 @@
   (foldr  (lambda (x y) (+ y 1)) 0 squares))
   ;;(length (car squares)))
 
+
+;;Takes in a grid and generates a random square on a blank grid square
 (define (genRandSquare grid)
   (define (genRandSquare2 grid x y)
         (if (square? (getSquare grid x y))
@@ -87,6 +91,7 @@
 (define (list-copy list)
   (if (null? list) '() (cons (car list) (list-copy (cdr list)))))
 
+;;Check if the entire grid is filled with squares, even after moving left right up and down
 (define (checkGameOver grid) false)
   ;;(let ((tempGrid (list-copy grid))) 
   ;;(or (foldr (lambda (x y) (and (foldr (lambda (x y) (and y (square? x))) true x) y)) true (moveLeft tempGrid))
@@ -99,6 +104,7 @@
 
 (define isGameOver? false)
 
+;;Returns true or false depending on if maybeSquare is a square object or not
 (define (square? maybeSquare)
   (not (number? maybeSquare)))
   ;;(eq? maybeSquare square ))
@@ -120,7 +126,6 @@
         (if (and (square? (car x)) (square? (cadr x)))
            (if (= (((car x) 'getLevel)) (((cadr x) 'getLevel)))
                (begin
-                 (display "If youre here, youre fucked")
                (((car x) 'levelUp))
                (mergeSquaresLeft (append (cons (car x) (cdr (cdr x))) '(0))))
                (cons (car x)(mergeSquaresLeft (cdr x))))
@@ -129,6 +134,11 @@
     (mergeSquaresLeft (moveAllToLeft x))
     )
 
+;;;Movement algorytims, right and up are based off left, down is based off up.
+;;Every movement except left manipulates its array into one that can be processed
+;; by moveLeft, and then it manipulates it back to its original form
+
+;;Move the squares left
 (define (moveLeft grid)
   (define (moveLeftFold x y)
     (cons (moveFold x y) y))
@@ -136,7 +146,7 @@
          (foldr moveLeftFold '() grid))
         )
 
-    
+ ;;Move the squares right   
 (define (moveRight grid)
   (define (moveRightFold x y)
     (cons (reverse(moveFold (reverse x) y)) y))
@@ -145,6 +155,7 @@
          (foldr moveRightFold '() grid))
         )
 
+;;Move the squares up 
 (define (moveUp grid)
         
 (define (moveUpFold x y)
@@ -158,7 +169,7 @@
 
   (moveUpLoop (foldr moveUpFold '() (moveUpLoop grid)))
   )
-
+;;Move the squares down 
 (define (moveDown grid)
   (define (moveDownFold x y)
     (cons (moveFold x y) y))

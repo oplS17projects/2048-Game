@@ -26,6 +26,7 @@
     ;;(else (display "Sucessfully loaded key-event-handler\n")))
   )
 
+  ;;This is the key-map for the game
   ;;This is where you define what each key will do
   ;;Need to move/merge squares in algorythms, play a sound, and update the window with new graphics
 (define (game-control w a-key)
@@ -36,11 +37,13 @@
     [(key=? a-key '"down")  (begin (set! mainGrid (genRandSquare(moveDown mainGrid))) (gameOver? mainGrid) (printGrid mainGrid) (plot-squares-interop mainGrid))]
     ))
 
+  ;;This is the key map for the menu, only space is used to start the game
 (define (menu-control w a-key)
   (cond
    [(key=? a-key " ")  (begin (printGrid mainGrid) (plot-squares-interop mainGrid) (big-bang 0 (on-release game-control) (to-draw update) (close-on-stop isGameOver?)))]
     ))
-  
+
+  ;;Debug to print the grid and the level of each square
   (define (printGrid grid)
     (define (displayLevel x)
     (cond ((eq? x '()) '())
@@ -55,23 +58,10 @@
   
   ;;Start the game
   (startGame)
-  (printGrid mainGrid)
+  ;;(printGrid mainGrid)
 
 
     ))
-
-
-  (define (printGrid grid)
-    (define (displayLevel x)
-    (cond ((eq? x '()) '())
-        ((square? (car x)) (cons (((car x) 'getLevel)) (displayLevel (cdr x))))
-     (else (cons (car x) (displayLevel (cdr x))))))
-    
-    (cond ((not(eq? grid '()))
-    (begin
-    (display (displayLevel (car grid)))
-    (display "\n")
-    (printGrid (cdr grid))))))
 
 ;;(main)
 
