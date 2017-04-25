@@ -26,7 +26,6 @@
     )
   (goToArrayX grid 1 x y))
 
-
 ;;Debug Grids
 (define (testGridX)
   (let ((test (createArray 4 4))) 
@@ -45,7 +44,6 @@
       (set! test (addSquare test 3 1))
       (set! test (addSquare test 4 1))
       test)))
-
 
 ;;Get Square
 (define (getSquare grid x y)
@@ -126,6 +124,7 @@
         (if (and (square? (car x)) (square? (cadr x)))
            (if (= (((car x) 'getLevel)) (((cadr x) 'getLevel)))
                (begin
+                ; (display "If youre here, youre bad")
                (((car x) 'levelUp))
                (mergeSquaresLeft (append (cons (car x) (cdr (cdr x))) '(0))))
                (cons (car x)(mergeSquaresLeft (cdr x))))
@@ -169,6 +168,7 @@
 
   (moveUpLoop (foldr moveUpFold '() (moveUpLoop grid)))
   )
+
 ;;Move the squares down 
 (define (moveDown grid)
   (define (moveDownFold x y)
