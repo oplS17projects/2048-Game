@@ -19,12 +19,9 @@
 (let ((mainGrid (genRandSquare(createArray 4 4))))
 (define (startGame)
  ;;Create start window
-(playSound "MainMenu.wav")
+;;(playSound "MainMenu.wav")
 (big-bang 0 (on-key menu-control) (to-draw start-screen) (stop-when closeMenu?) (close-on-stop true))
 (stopSounds)
-;;Call on-key-event, which will listen for keyboard events and a cond will handle each key press
-;;(cond ((false?(on-key-event change)) (display "Failed to start key-event-handler\n"))
-    ;;(else (display "Sucessfully loaded key-event-handler\n")))
   )
 
   ;;This is the key-map for the game
@@ -40,9 +37,14 @@
 
 (define (startGameOverGui grid)
   (playSound "Sound6.wav")
+  ;;(big-bang 0 (to-draw stop-screen-main))
   (storeScore (getScore grid))
-  ;;(big-bang 0 (to-draw stop-screen))
+  
   )
+
+  (define (stop-screen-main n)
+    (storeScore (getScore mainGrid))
+    (stop-screen n))
 
 (define (startGameGui)
   (begin (stopSounds) (closeTheMenu) (plot-squares-interop mainGrid) (big-bang 0 (on-release game-control) (to-draw update) (stop-when gameWinClose?) (close-on-stop true))))

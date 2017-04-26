@@ -3,3 +3,6 @@ Solomon: 183
 Tim: 113
 Tim: 171
 Tim: 156
+Tim: 165
+Tim: 189
+Tim: 170
