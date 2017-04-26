@@ -43,11 +43,11 @@ We plan to implement a leaderboard, storing the user's name and score, and if po
 Not Applicable
 
 ### Deliverable and Demonstration
-Currently we have a racket program that when executed, creates a window where the game can be played by the user using keyboard inputs. This game contains visuals and sound that will be displayed for everyone to see. The program will detect when the game is over (no more possible moves), and will ask for the player's name, and will then display the leaderboard. This will be what we demonstrate during our final presentation
+Currently we have a racket program that when executed, creates a window where the game can be played by the user using keyboard inputs. This game contains visuals and sound that will be displayed for everyone to see. The program will detect when the game is over (no more possible moves), and will ask for the player's name, and will then display the leaderboard. This will be what we demonstrate during our final presentation.
 At the end, we will show the leaderboard and how it works, including the raw data stored in the database.
 
 ### Evaluation of Results
-We have currently achieved a majority of our goals. There are some minor hiccups with moving the squares but nothing that obstructs the user from enjoying our game. With the additional time after our demonstration until the code turn in, we will work on smoothing out the user experience, finishing the sound, and as stretch goals, possibly the leaderboard, and if possible, include game modes with differing sized grids.
+We have currently achieved a majority of our goals. There were some minor hiccups with moving the squares but that has since been resolved, and there shouldnt be any issues. With the additional time after our demonstration until the code turn in, we will work on smoothing out the user experience, finishing the sound, and as stretch goals, possibly the online leaderboard, and if possible, include game modes with differing sized grids. All of the algorithms are compatible with dynamic grid sizes, but the bugs that may arise pushed this goal past the presentation date.
 Some hiccups arose in handling windows in universe. I wasn't sure what the best way to handle windows would be, so the implementation is a bit scattered. Tim eneded up using racket gui to create the leaderboard, and the interface for the player to enter their name.
 
 ## Architecture Diagram
