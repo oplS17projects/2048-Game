@@ -8,6 +8,7 @@
 (require "universe_gui.rkt")
 (require "Sound.rkt")
 (require "Algorithms.rkt")
+(require "Leaderboards.rkt")
 
 (define menu-draw
   start-screen)
@@ -16,11 +17,11 @@
 ;;Everything else will happen in other files (libraries)
 (define (main)
 (let ((mainGrid (genRandSquare(createArray 4 4))))
-
 (define (startGame)
  ;;Create start window
-(big-bang 0 (on-key menu-control) (to-draw start-screen))
-
+(playSound "MainMenu.wav")
+(big-bang 0 (on-key menu-control) (to-draw start-screen) (stop-when closeMenu?) (close-on-stop true))
+(stopSounds)
 ;;Call on-key-event, which will listen for keyboard events and a cond will handle each key press
 ;;(cond ((false?(on-key-event change)) (display "Failed to start key-event-handler\n"))
     ;;(else (display "Sucessfully loaded key-event-handler\n")))
@@ -31,16 +32,25 @@
   ;;Need to move/merge squares in algorythms, play a sound, and update the window with new graphics
 (define (game-control w a-key)
   (cond
-    [(key=? a-key "left")  (begin (set! mainGrid (genRandSquare(moveLeft mainGrid))) (gameOver? mainGrid) (printGrid mainGrid) (plot-squares-interop mainGrid))]
-    [(key=? a-key "right") (begin (set! mainGrid (genRandSquare(moveRight mainGrid))) (gameOver? mainGrid) (printGrid mainGrid) (plot-squares-interop mainGrid))]
-    [(key=? a-key "up")    (begin (set! mainGrid (genRandSquare(moveUp mainGrid))) (gameOver? mainGrid) (printGrid mainGrid) (plot-squares-interop mainGrid))]
-    [(key=? a-key '"down")  (begin (set! mainGrid (genRandSquare(moveDown mainGrid))) (gameOver? mainGrid) (printGrid mainGrid) (plot-squares-interop mainGrid))]
+    [(key=? a-key "left")   (if (gameOver? mainGrid) (startGameOverGui mainGrid) (begin (playSound "Sound5.wav") (set! mainGrid (genRandSquare(moveLeft mainGrid false)))  (plot-squares-interop mainGrid)))]
+    [(key=? a-key "right")  (if (gameOver? mainGrid) (startGameOverGui mainGrid) (begin (playSound "Sound5.wav") (set! mainGrid (genRandSquare(moveRight mainGrid false)))  (plot-squares-interop mainGrid)))]
+    [(key=? a-key "up")     (if (gameOver? mainGrid) (startGameOverGui mainGrid) (begin (playSound "Sound5.wav") (set! mainGrid (genRandSquare(moveUp mainGrid false)))  (plot-squares-interop mainGrid)))]
+    [(key=? a-key '"down")   (if (gameOver? mainGrid) (startGameOverGui mainGrid) (begin (playSound "Sound5.wav") (set! mainGrid (genRandSquare(moveDown mainGrid false)))  (plot-squares-interop mainGrid)))]
     ))
 
+(define (startGameOverGui grid)
+  (playSound "Sound6.wav")
+  (storeScore (getScore grid))
+  ;;(big-bang 0 (to-draw stop-screen))
+  )
+
+(define (startGameGui)
+  (begin (stopSounds) (closeTheMenu) (plot-squares-interop mainGrid) (big-bang 0 (on-release game-control) (to-draw update) (stop-when gameWinClose?) (close-on-stop true))))
+  
   ;;This is the key map for the menu, only space is used to start the game
 (define (menu-control w a-key)
   (cond
-   [(key=? a-key " ")  (begin (printGrid mainGrid) (plot-squares-interop mainGrid) (big-bang 0 (on-release game-control) (to-draw update) (close-on-stop isGameOver?)))]
+   [(key=? a-key " ") (startGameGui)]
     ))
 
   ;;Debug to print the grid and the level of each square
@@ -62,8 +72,8 @@
 
 
     ))
-
-;;(main)
+ 
+(main)
 
 
 
