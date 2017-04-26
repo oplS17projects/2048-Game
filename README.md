@@ -24,7 +24,7 @@ We used data abstraction to its full potential by creating methods with meaningf
 Each game object will be encapsulated, the user will not be able to change anything other than the game board through keyboard input.
 
 - Recursion
-For each move, recursion is used to check which blocks are touching each other. Recurion is also used to plot the squares to the grid. 
+For each move, recursion is used to check which blocks are touching each other. Recurion is also used to plot the squares to the grid as well as made with recursive functions. 
 
 - Map
 Map is used to map the direction the player inputs to the board. so if the player chooses left it would map left to squares on the board, moving each block left as long as they are not blocked by another
@@ -47,13 +47,13 @@ Currently we have a racket program that when executed, creates a window where th
 At the end, we will show the leaderboard and how it works, including the raw data stored in the database.
 
 ### Evaluation of Results
-We have currently achieved a majority of our goals. There are some minor hiccups with moving the squares but nothing that obstructs the user from enjoying our game. With the additional time after our demonstration until the code turn in, we will work on smoothing out the user experience, finishing the sound and possibly the leaderboard, and if possible include game modes with differing sized grids.
+We have currently achieved a majority of our goals. There are some minor hiccups with moving the squares but nothing that obstructs the user from enjoying our game. With the additional time after our demonstration until the code turn in, we will work on smoothing out the user experience, finishing the sound, and as stretch goals, possibly the leaderboard, and if possible, include game modes with differing sized grids.
 
 ## Architecture Diagram
 Upload the architecture diagram you made for your slide presentation to your repository, and include it in-line here.
 
 Create several paragraphs of narrative to explain the pieces and how they interoperate.
-![image](/Architecture.jpg?raw=true "Diagram")
+![image](/ArchitectureBETTER?raw=true "Diagram")
 
 The user generates input using the keyboard, which goes to the main program. The program then generates a new square and moves all the squares together. It also creates a sound which is played to the user. Then this information is stored in a database as a "move" and when the player's game is over, it stores the final score and the user's name in the database.
 ## Schedule
