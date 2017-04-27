@@ -128,6 +128,7 @@
 
 ;;This will be used for both left and right folding
 ;;List input and output must be reversed for right folding
+;;NOTE - Include in writeup;;
 (define (moveFold x y readOnly)
     
     (define (moveAllToLeft x)
