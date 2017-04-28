@@ -2,8 +2,13 @@
 (require 2htdp/image)
 (require "Algorithms.rkt")
 
+
+(define 6grid #f) ;this is just a test bool for grid size until it can be gathered from menu
+;;IMPORTANT change (let ((mainGrid (genRandSquare(createArray 4 4)))) in game handler to 6 6 in order to function
+
 ;;This defines the grid size. will use -a to a for x and y directions
-(define grid_size 160) ;;1 1 is top left 240 default
+(define grid_size (if (eq? #t 6grid) 160 240)) ;;1 1 is top left 240 default for 4 4
+
 (define square_size (* grid_size (/ 2 3)))
 (define grid-square (square square_size 'outline 'black)) ;;1 unit = px size of square
 
@@ -17,8 +22,7 @@
       (above (row rs) (grid rs (- cs 1))) ;stacks all the rows of squares on top of eachother to make a grid
       (row rs)))
 
-(define 6grid #f) ;this is just a test bool for grid size until it can be gathered from menu
-;;IMPORTANT change (let ((mainGrid (genRandSquare(createArray 4 4)))) in game handler to 6 6 in order to function 
+
 
 ;debug grid
 (define (testGridZ)
@@ -47,7 +51,10 @@
   (set! mainGridun (plot-squares (convert list-squares) (getScore list-squares))))
  
 (define (convert squares)
-  (define grid-coeff (if (eq? #t 6grid) 4 2.65))
+  
+  (define grid-coeff (if (eq? #t 6grid) 4 2.65))  ;;this is so the squares line up with eachother
+  (define grid-offset (if (eq? #t 6grid) 1.67 1)) ;;this is so the squares line up with the grid
+
   (let ((as (array-size squares)))
   (define (loopx squares x y)
      (if (eq? squares '()) '()
@@ -57,9 +64,9 @@
    ))
   (define (loopy squares y)
     (if (eq? squares '()) '()
-        (append (loopx (car squares) grid_size y) (loopy (cdr squares ) (- y (/ (* grid-coeff grid_size) as))))
+        (append (loopx (car squares) (* grid-offset grid_size) y) (loopy (cdr squares ) (- y (/ (* grid-coeff grid_size) as))))
         ))
-  (reverse(loopy squares grid_size))
+  (reverse(loopy squares (* grid-offset grid_size)))
   ))
   
 ;(define (plot-squares list-squares)
@@ -107,8 +114,8 @@
 (define (plot-squares list-squares score)
   (if (null?  list-squares)
       (if (eq? #t 6grid)
-          (grid 8 8) ;so far 6 6 grid is off center and needs a 8 8 to fit on grid or squares go oob
-          (overlay/xy (grid 4 4) 0 400 (text (string-append "Score: " (number->string score)) 24 "olive"))) ;default grid (getScore list-squares)
+          (overlay/xy (grid 6 6) 0 600 (text (string-append "Score: " (number->string score)) 24 "black")) ;so far 6 6 grid is off center and needs a 8 8 to fit on grid or squares go oob
+          (overlay/xy (grid 4 4) 0 600 (text (string-append "Score: " (number->string score)) 24 "black"))) ;default grid (getScore list-squares)
       (overlay/offset (level-square (get-square-level (car list-squares))) (get-x-coord (car list-squares)) (get-y-coord (car list-squares)) (plot-squares (cdr list-squares) score))))
 
 
