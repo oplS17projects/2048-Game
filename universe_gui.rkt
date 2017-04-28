@@ -7,7 +7,7 @@
 ;;IMPORTANT change (let ((mainGrid (genRandSquare(createArray 4 4)))) in game handler to 6 6 in order to function
 
 ;;This defines the grid size. will use -a to a for x and y directions
-(define grid_size (if (eq? #t 6grid) 160 240)) ;;1 1 is top left 240 default for 4 4
+(define grid_size 240) ;;1 1 is top left 240 default for 4 4
 
 (define square_size (* grid_size (/ 2 3)))
 (define grid-square (square square_size 'outline 'black)) ;;1 unit = px size of square
@@ -23,6 +23,8 @@
       (row rs)))
 
 
+
+(define (using6grid) (set! 6grid #t) (set! grid_size 160) (set! square_size (* grid_size (/ 2 3))) (set! grid-square (square square_size 'outline 'black)))
 
 ;debug grid
 (define (testGridZ)

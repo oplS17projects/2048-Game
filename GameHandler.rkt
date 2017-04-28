@@ -46,13 +46,17 @@
     (storeScore (getScore mainGrid))
     (stop-screen n))
 
-(define (startGameGui)
+(define (startGameGui44)
   (begin (stopSounds) (closeTheMenu) (plot-squares-interop mainGrid) (big-bang 0 (on-release game-control) (to-draw update 650 700) (stop-when gameWinClose?) (close-on-stop true))))
+
+  (define (startGameGui66)
+  (begin (stopSounds) (closeTheMenu) (set! mainGrid (genRandSquare(createArray 6 6))) (using6grid) (plot-squares-interop mainGrid) (big-bang 0 (on-release game-control) (to-draw update 650 700) (stop-when gameWinClose?) (close-on-stop true))))
   
   ;;This is the key map for the menu, only space is used to start the game
 (define (menu-control w a-key)
   (cond
-   [(key=? a-key " ") (startGameGui)]
+   [(key=? a-key " ") (startGameGui44)]
+   [(key=? a-key "\r") (startGameGui66)]
     ))
 
   ;;Debug to print the grid and the level of each square
