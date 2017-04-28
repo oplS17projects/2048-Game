@@ -16,7 +16,7 @@
 ;;Keyboard event handler, pretty much the only thing that needs to happen in the handler
 ;;Everything else will happen in other files (libraries)
 (define (main)
-(let ((mainGrid (genRandSquare(createArray 4 4))))
+(let ((mainGrid (genRandSquare(createArray 4 4)))) ;;change to 6 6 for bigger list
 (define (startGame)
  ;;Create start window
 ;;(playSound "MainMenu.wav")
@@ -47,7 +47,7 @@
     (stop-screen n))
 
 (define (startGameGui)
-  (begin (stopSounds) (closeTheMenu) (plot-squares-interop mainGrid) (big-bang 0 (on-release game-control) (to-draw update) (stop-when gameWinClose?) (close-on-stop true))))
+  (begin (stopSounds) (closeTheMenu) (plot-squares-interop mainGrid) (big-bang 0 (on-release game-control) (to-draw update 650 700) (stop-when gameWinClose?) (close-on-stop true))))
   
   ;;This is the key map for the menu, only space is used to start the game
 (define (menu-control w a-key)

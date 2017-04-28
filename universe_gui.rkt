@@ -114,8 +114,8 @@
 (define (plot-squares list-squares score)
   (if (null?  list-squares)
       (if (eq? #t 6grid)
-          (overlay/xy (grid 6 6) 0 600 (text (string-append "Score: " (number->string score)) 24 "black")) ;so far 6 6 grid is off center and needs a 8 8 to fit on grid or squares go oob
-          (overlay/xy (grid 4 4) 0 600 (text (string-append "Score: " (number->string score)) 24 "black"))) ;default grid (getScore list-squares)
+          (overlay/xy (grid 6 6) 0 637 (text (string-append "Score: " (number->string score)) 24 "black")) ;so far 6 6 grid is off center and needs a 8 8 to fit on grid or squares go oob
+          (overlay/xy (grid 4 4) 0 650 (text (string-append "Score: " (number->string score)) 24 "black"))) ;default grid (getScore list-squares)
       (overlay/offset (level-square (get-square-level (car list-squares))) (get-x-coord (car list-squares)) (get-y-coord (car list-squares)) (plot-squares (cdr list-squares) score))))
 
 
