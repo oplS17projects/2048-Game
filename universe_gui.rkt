@@ -38,10 +38,14 @@
 
 (define (update n)
   mainGridun)
-  
-(define (plot-squares-interop list-squares)
-  (set! mainGridun (plot-squares (convert list-squares))))
 
+
+
+(define (plot-squares-interop list-squares)  
+  (display "\n")
+  (display (getScore  list-squares))
+  (set! mainGridun (plot-squares (convert list-squares) (getScore list-squares))))
+ 
 (define (convert squares)
   (define grid-coeff (if (eq? #t 6grid) 4 2.65))
   (let ((as (array-size squares)))
@@ -100,18 +104,19 @@
 (define (get-y-coord square)
   (car (cdr square)))
 
-(define (plot-squares list-squares)
+(define (plot-squares list-squares score)
   (if (null?  list-squares)
       (if (eq? #t 6grid)
           (grid 8 8) ;so far 6 6 grid is off center and needs a 8 8 to fit on grid or squares go oob
-          (grid 4 4)) ;default grid 
-      (overlay/offset (level-square (get-square-level (car list-squares))) (get-x-coord (car list-squares)) (get-y-coord (car list-squares)) (plot-squares (cdr list-squares)))))
+          (overlay/xy (grid 4 4) 0 400 (text (string-append "Score: " (number->string score)) 24 "olive"))) ;default grid (getScore list-squares)
+      (overlay/offset (level-square (get-square-level (car list-squares))) (get-x-coord (car list-squares)) (get-y-coord (car list-squares)) (plot-squares (cdr list-squares) score))))
 
-(plot-squares-interop (testGridZ))
-(testGridZ)
-mainGridun
+
+
+;(plot-squares-interop (testGridY))
+;mainGridun
 ;(plot-squares (testGridY))
-(convert (testGridZ))
+;(convert (testGridZ))
 ;(testGridX)
 ;(((car (car (testGridY))) 'getLevel))
 ;(getSquare (testGridY) 1 1)
