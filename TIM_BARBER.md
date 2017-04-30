@@ -28,7 +28,6 @@ The code uses five libraries:
 (require 2htdp/batch-io)
 (require htdp/gui)
 (require (planet clements/rsound))
-
 ```
 
 * The ```2htdp/universe``` library provides the window creation, image drawing, and keyboard event handling we used in our game.
@@ -37,6 +36,7 @@ The code uses five libraries:
 * The ```htdp/gui``` library provides basic GUI functionality used to create the window for the user to enter their name, as well as display the user’s high score. 
 * The ```planet clements/rsound``` library provides WAV sound functionality, allowing the game to play sounds depending on the actions on screen.
 
+I predominantly used ```2htdp/batch-io``` ```htdp/gui``` ```planet clements/rsound```, and used ```2htdp/universe``` to create the windows.
 
 # Key Code Excerpts
 
@@ -46,8 +46,8 @@ embody ideas from UMass Lowell's Organization of Programming languages course.
 Five examples are shown and they are individually numbered. 
 
 ## 1. Square Objects
- Using what I learned in class, I created a square object in racket. 
- Created a definition with a let statement to hold the variables needed in the object.
+Using what I learned in class, I created a square object in racket. 
+I Created a definition with a let statement to hold the variables needed in the object.
 ''(let ((level 1)(color "green")(size 1))'''
 
 I then created multiple get and set procedures, 
@@ -81,7 +81,7 @@ Then I created a dispatch function that takes a procedure name, and then returns
                (else (error "Unknown request: "  m))))
 ```               
 I then finished the definition by returning the dispatch procedure (unevaluated):
-''dispatch))
+```dispatch))```
 What this does is that when a square is created in the grid, it becomes the dispatch procedure, 
 with its own values kept inside the let statement encapsulating that dispatch function. 
 The dispatch procedure is then evaluated and it returns the procedure asked for (unevaluated), 
@@ -104,6 +104,7 @@ so it must be called multiple times depending on the row count:
 ```
  It starts by moving all squares as far left as they can go (using moveAllToLeft). 
  Squares cannot pass through other squares but they can pass through blank spaces (indicated as 0).
+ 
  This procedure is recursive, each call deals with the car (the head) of the list. 
  If its not a square, it is moved to the end of the row and everything else is moved left by 1. 
  If not, it moves on to the next element in the list until we reach the end of the list (indicated by nil)
@@ -128,8 +129,10 @@ so it must be called multiple times depending on the row count:
 Then the squares are merged (using mergeSquaresLeft), using the row returned by moveAllToLeft. 
 mergeSquaresLeft iterates through the row, if two adjacent squares are the same level, 
 then it levels up the one furthest left and removes the one furthest right. 
+
 It also plays a sound depending on if its changing size or changing color (and size). 
 A readOnly flag is set if we want to check for a future moves without impacting the level of the object. 
+
 Even if the grid is a copy, the objects are not so any changes to a copy of the grid will still change the object. 
 It was for this reason that I had to create the readOnly flag to prevent changes when doing operations,
 such as checking for game over, which checks all possible next moves.
@@ -139,7 +142,7 @@ This is what the procedure calls when it is run.
 It calls mergeSquaresLeft and give it the grid created by moveAllToLeft, along with the readOnly flag.
 
 From there, moving left and right was only a few extra lines:
-;;Move the squares left
+```
  (define (moveLeft grid readOnly)
    (define (moveLeftFold x y)
      (cons (moveFold x y readOnly) y))
@@ -147,7 +150,6 @@ From there, moving left and right was only a few extra lines:
           (foldr moveLeftFold '() grid))
          )
  
-  ;;Move the squares right   
  (define (moveRight grid readOnly)
    (define (moveRightFold x y)
      (cons (reverse(moveFold (reverse x) y readOnly)) y))
@@ -247,9 +249,13 @@ Any of these actions requires extensive list manipulation. Here is an excerpt of
 The code uses two functions, goToArrayY and goToArrayX. goToArrayX is called with a count of 1, 
 which first waits for goToArrayY. goToArrayY recursively calls itself with the cdr of the grid until the counter 
 equals the given y coordinate (which starts at 1). If the grid is nil before we get to the coordinate, or on the coordinate,
-we return an error. Once y is found, it is returned to goToArrayX as a single list of the squares. 
+we return an error. 
+
+Once y is found, it is returned to goToArrayX as a single list of the squares. 
+
 Then goToArrayX uses the same method of recursively calling itself until the count equals the x coordinate. 
 Once the specific coordinate is reached, it will replace whatever is there with a new square object. 
+
 This procedure is “dumb” in the sense that it does not check for an existing square, 
 this is expected to be done externally before this procedure is called. The only checks it does it bounds checking.
 
@@ -280,9 +286,9 @@ Within the noBlanks? procedure, I also used short circuiting:
                    (noBlanks? (cdr grid)))))
 ```
 noBlanks? iterates over the lists, and within each list, checks for a blank square (using square?). 
-For the first blank square it sees, it returns false. This short circuiting will help prevent a full grid iteration, 
-which can be expensive especially if the grid is large. However, if the grid is completely full, 
-the grid will need to be iterated through in its entirty to determine there are no blank squares left.
+For the first blank square it sees, it returns false. 
+This short circuiting will help prevent a full grid iteration, which can be expensive especially if the grid is large. 
+However, if the grid is completely full, the grid will need to be iterated through in its entirty to determine there are no blank squares left.
 
 While I have learned short-circuiting in the past, this class taught me the performance benefit of using short circuiting, 
 and it made a noticeable impact on my machine once I implemented short circuiting in the excerpts above.
