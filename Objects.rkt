@@ -3,7 +3,11 @@
 (provide square
          blankSquare)
 
- 
+;;Square object has a color, size, and level
+;;The object can have its level, size, and color read
+;;The object can have its size and color changed,
+;;and can have its level positivly incremented
+;;Uses a dispatch method that can be used to access these functions
 (define (square)
   (let ((level 1)(color "green")(size 1))
       (define (getLevel)
@@ -36,7 +40,7 @@
               (else (error "Unknown request: "  m))))
 dispatch))
 
-;;Create a blank square that will error gracefully when used
+;;Create a blank square that will error gracefully when used (ended up not being widly used)
 (define (blankSquare)
   (define (dispatch m)
         (lambda () (begin (display "\nThis is not a square") -1)))

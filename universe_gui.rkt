@@ -22,8 +22,7 @@
       (above (row rs) (grid rs (- cs 1))) ;stacks all the rows of squares on top of eachother to make a grid
       (row rs)))
 
-
-
+;;Callable procedure that sets game up for a 6 x 6 grid instead of 4 x 4. If this isn't called, defaults to 4 x 4
 (define (using6grid) (set! 6grid #t) (set! grid_size 160) (set! square_size (* grid_size (/ 2 3))) (set! grid-square (square square_size 'outline 'black)))
 
 ;debug grid
@@ -40,14 +39,18 @@
       (set! test (addSquare test 6 6))
       test)))
 
+;;
 (define mainGridun '())
 
+;;Due to limitations of universe (no parameters can be sent), mainGridun is set to the picture returned by plot-squares,
+;;which is then used as the universe's to-draw function
 (define (update n)
   mainGridun)
 
 
-
-(define (plot-squares-interop list-squares)  
+;;Given the grid created by Algorithms, adds coordinates for each square object  and removes blank squares (using convert) 
+;;
+(define (plot-squares-interop list-squares)
   (display "\n")
   (display (getScore  list-squares))
   (set! mainGridun (plot-squares (convert list-squares) (getScore list-squares))))
