@@ -48,7 +48,7 @@ Five examples are shown and they are individually numbered.
 ## 1. Square Objects
 Using what I learned in class, I created a square object in racket. 
 I Created a definition with a let statement to hold the variables needed in the object.
-''(let ((level 1)(color "green")(size 1))'''
+```(let ((level 1)(color "green")(size 1))```
 
 I then created multiple get and set procedures, 
 using an incrementing procedure for the level to prevent accidental values being placed in level:
@@ -82,6 +82,7 @@ Then I created a dispatch function that takes a procedure name, and then returns
 ```               
 I then finished the definition by returning the dispatch procedure (unevaluated):
 ```dispatch))```
+
 What this does is that when a square is created in the grid, it becomes the dispatch procedure, 
 with its own values kept inside the let statement encapsulating that dispatch function. 
 The dispatch procedure is then evaluated and it returns the procedure asked for (unevaluated), 
@@ -138,6 +139,7 @@ It was for this reason that I had to create the readOnly flag to prevent changes
 such as checking for game over, which checks all possible next moves.
 
 ```(mergeSquaresLeft (moveAllToLeft x) readOnly))```
+                                                                                                                                                                                          
 This is what the procedure calls when it is run. 
 It calls mergeSquaresLeft and give it the grid created by moveAllToLeft, along with the readOnly flag.
 
@@ -223,7 +225,9 @@ Was used to construct a grid with the first element from each list removed
 These folds were used in conjunction to convert each column into a row.
 
 Other examples of folding are in the score counting:
+
 ```(foldr (lambda (x y) (+ (foldr (lambda (x y) (if (square? x) (+ (* ((x 'getLevel)) (* ((x 'getLevel)) ((x 'getLevel)))) y) (+ y 0))) 0 x) y)) 0 grid)```
+
 This excerpt uses nested foldr’s to iterate through each list. 
 Within each list, if there is a square, it adds the level of that square^3 to the score.
 
