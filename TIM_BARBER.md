@@ -48,6 +48,7 @@ Five examples are shown and they are individually numbered.
 ## 1. Square Objects
 Using what I learned in class, I created a square object in racket. 
 I Created a definition with a let statement to hold the variables needed in the object.
+
 ```(let ((level 1)(color "green")(size 1))```
 
 I then created multiple get and set procedures, 
