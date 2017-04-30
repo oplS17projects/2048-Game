@@ -4,18 +4,11 @@
 ### April 30, 2017
 
 # Overview
-My partner and I made the game 2048 in racket. The premise of the game is to match equal sized and colored squares with eachother to create a new square
-of a larger size or different color. The more squares you are able to match the more points you will earn. Once the game is lost the player will be able to 
-store their score in a local leaderboard text file. 
+My partner and I made the game 2048 in racket. The premise of the game is to match equal sized and colored squares with eachother to create a new square of a larger size or different color. The more squares you are able to match the more points you will earn. Once the game is lost the player will be able to store their score in a local leaderboard text file. 
 
-I worked predominately on the GUI for this project. This proved to be a challenge, since I had little experience with making GUI's let alone making one in racket. However, I can't avoid working 
-with GUI's forever and this looked like a great learning experience to get aquainted with how they work, so I eagerly accepted the challenge.
-I had to learn a lot of new material and made a lot of mistakes, often times having to completely rewrite larger portions of code. One example of this is 
-my old turt_gui file, which I spent alot of time on only to find out that it wouldn't function the way we needed it to with user input. After porting the graphics to 2htdp/image I was met with
-another challenge, getting everything to line up correctly. While it was easy to do in turtle graphics, converting the array of squares from the Algorythyms file into squares 
-which correctly lined up on the grid was definitely my hardest part of the project.
+I worked predominately on the GUI for this project. This proved to be a challenge, since I had little experience with making GUI's let alone making one in racket. However, I can't avoid working with GUI's forever and this looked like a great learning experience to get aquainted with how they work, so I eagerly accepted the challenge. I had to learn a lot of new material and made a lot of mistakes, often times having to completely rewrite larger portions of code. One example of this is my old turt_gui file, which I spent alot of time on only to find out that it wouldn't function the way we needed it to with user input. After porting the graphics to 2htdp/image I was met with another challenge, getting everything to line up correctly. While it was easy to do in turtle graphics, converting the array of squares from the Algorithms file into squares which correctly lined up on the grid was definitely my hardest part of the project.
 
-**Authorship note:** All of the code described here was written by myself.
+**Authorship note:** All of the code described here was written by myself, except for example 3 which both Tim and I worked on
 
 # Libraries Used
 I predominately used the 2htdp/image library but also used a bit of the turtle and universe libraries early on in the p
@@ -31,15 +24,9 @@ I predominately used the 2htdp/image library but also used a bit of the turtle a
 
 # Key Code Excerpts
 
-Here is a discussion of the most essential procedures, including a description of how they embody ideas from 
-UMass Lowell's COMP.3010 Organization of Programming languages course.
-
-Five examples are shown and they are individually numbered. 
- 
 ## 1. Selectors for square object using Procedural Abstraction
 
-The square object we created contains an x coord, y coord and dispatch. To operate on this square object I created a set of selector functions 
-to work with in the plot-squares function.
+The square object we created contains an x coord, y coord and dispatch. To operate on this square object I created a set of selector functions to work with in the plot-squares function.
 
 This selector accesses the level. It works by cdring to the third object in the list, which is a procedure, and dispatches it with the getLevel condition, thus returning its level. 
 ```
@@ -87,11 +74,9 @@ Depending on whether the 6 grid flag is on the squares are then placed over the 
 ## 3. Using recursion for the conversion of square array
 
 Tim and I worked on the conversion function together. Tim initially created the function to help me along while I was having trouble porting the gui from turtle graphics to 2htdp/image
-It did plot the squares to the grid but they were offcentered and could only function with a 4x4 grid. I attempted to create my own iterative conversion function from scratch but ran into esssentially the same problem the 
-original function did. This was the most difficult part of the assignment for me, as I ended up going through the function line by line testing different values to understand why the squares weren't lining up correctly
-I ended up finding and adding the exact coefficients for both the 4x4 and the 6x6 grid so they lined up correctly. The 6x6 grid was alot harder than the 4x4 grid because while the squares lined up, each square was offset 1 square 
-so the last row of squares was outside of the grid. I was able to find out that the 6x6 grid needed to be multiplied by another coefficient before its call to loopy here
-``` (reverse(loopy squares (* grid-offset grid_size)))``` Since 4x4 was already fine it is just multiplied by 1. With these additions and calibrations we were able to convert the array into a series of squares with precise coordinates.
+It did plot the squares to the grid but they were offcentered and could only function with a 4x4 grid. I attempted to create my own iterative conversion function from scratch but ran into essentially the same problem his original function did. This was the most difficult part of the assignment for me, as I ended up going through the function line by line testing different values to understand why the squares weren't lining up correctly. I ended up finding and adding the exact coefficients for both the 4x4 and the 6x6 grid so they lined up correctly. The 6x6 grid was alot harder than the 4x4 grid because while the squares lined up, each square was offset 1 square on the grid, so the last row of squares was outside of the grid. I was able to find out that the 6x6 grid needed to be multiplied by another coefficient before its call to loopy here
+``` (reverse(loopy squares (* grid-offset grid_size)))``` 
+Since 4x4 was already fine it is just multiplied by 1. With these additions and calibrations we were able to convert the array into a series of squares with precise coordinates.
 
 
 ```
