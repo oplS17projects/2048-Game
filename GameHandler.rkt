@@ -62,7 +62,7 @@
   (begin (stopSounds) (closeTheMenu) (set! mainGrid (genRandSquare(createArray 6 6))) (using6grid) (plot-squares-interop mainGrid) (big-bang 0 (on-release game-control) (to-draw update 650 700) (stop-when gameWinClose?) (close-on-stop true))))
   
   ;;This is the key map for the menu, space is used to start the game 4 x 4
-  Return is used to start the game 6 x 6
+  ;;Return is used to start the game 6 x 6
 (define (menu-control w a-key)
   (cond
    [(key=? a-key " ") (startGameGui44)]
